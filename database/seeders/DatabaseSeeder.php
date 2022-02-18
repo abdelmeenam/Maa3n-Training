@@ -15,10 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //calling factories
         \App\Models\User::factory(1)->create();
-        // Category::factory(10)->create();
-        // $this->call([
-        //     PostsTableSeeder::class
-        // ]);
+        Category::factory(10)->create();
+
+        //calling seeder
+        $this->call([
+            PostsTableSeeder::class
+        ]);
     }
 }

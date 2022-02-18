@@ -17,12 +17,15 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->longText('content')->nullable();
+            $table->longText('content');
             $table->string('image')->nullable();
             $table->enum('status', ['pulished', 'archived'])->default('pulished');
 
-            $table->foreignId('cat_id')->references('id')->on('categories')->cascadeOnDelete();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('cat_id')->nullable();
+            $table->foreign('cat_id')->references('id')->on('categories')->nullOnDelete();
+
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
 
             $table->timestamps();
         });
